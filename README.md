@@ -1,3 +1,6 @@
 # iran_dns
 
-<img src="https://user-images.githubusercontent.com/37228870/233464184-45431c25-8e28-46fb-9c87-85a3383f5071.png" width="200">
+![image]()
+
+
+<img src="https://user-images.githubusercontent.com/37228870/233464832-f9e84c27-e0cf-42fc-b5fa-17f1bdfb2658.png" width="200">
