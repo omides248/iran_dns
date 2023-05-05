@@ -46,7 +46,7 @@ class DownloadVersion:
     def read_bytes(self):
         if self.download_failed:
             return
-        self.windows_main.progress["value"] = self.bytes
+        self.windows_main.frm_footer.progress["value"] = self.bytes
         if self.bytes < self.max_bytes:
             # read more bytes after 100 ms
             self.master.after(100, self.read_bytes)
@@ -57,9 +57,9 @@ class DownloadVersion:
                 r.raise_for_status()
                 local_filename_downloading = f"{local_filename_downloading}.downloading"
                 cl_bytes = int(r.headers.get("Content-Length"))
-                self.windows_main.progress["value"] = 0
+                self.windows_main.frm_footer.progress["value"] = 0
                 self.max_bytes = cl_bytes
-                self.windows_main.progress["maximum"] = cl_bytes
+                self.windows_main.frm_footer.progress["maximum"] = cl_bytes
                 Thread(target=self.read_bytes, daemon=True).start()
                 with open(local_filename_downloading, 'wb') as f:
                     chunk_size = 8192
