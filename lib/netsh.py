@@ -97,8 +97,7 @@ class Netsh:
                         interface_default_gateway_list.append({"interface_name": interface_name,
                                                                "default_gateway": default_gateway,
                                                                "interface_metric": interface_metric})
-            interface_default_gateway_list = sorted(interface_default_gateway_list, key=lambda d: d['interface_metric'],
-                                                    reverse=True)
+            interface_default_gateway_list = sorted(interface_default_gateway_list, key=lambda d: d['interface_metric'])
             if len(interface_default_gateway_list) > 0:
                 return interface_default_gateway_list[0].get("interface_name")
             return ""
