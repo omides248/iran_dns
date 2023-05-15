@@ -46,11 +46,19 @@ class InterfaceLabelFrame(Frame):
 
         if primary_dns == "" and secondary_dns == "":
             self.interface_name_lbl.config(text="")
-        elif primary_dns == DnsIP.radar_game_dns[0] and secondary_dns == DnsIP.radar_game_dns[1]:
+
+        elif primary_dns in (DnsIP.radar_game_dns[0], DnsIP.radar_game_dns[1]) or secondary_dns in (
+                DnsIP.radar_game_dns[0], DnsIP.radar_game_dns[1]):
             self.interface_name_lbl.config(text=f"{interface_name.strip()}: {DnsName.radar_game_txt}")
-        elif primary_dns == DnsIP.electro_dns[0] and secondary_dns == DnsIP.electro_dns[1]:
+
+        elif primary_dns in (DnsIP.electro_dns[0], DnsIP.electro_dns[1]) or secondary_dns in (
+                DnsIP.electro_dns[0], DnsIP.electro_dns[1]):
             self.interface_name_lbl.config(text=f"{interface_name.strip()}: {DnsName.electro_txt}")
-        elif primary_dns == DnsIP.d_403_online_dns[0] and secondary_dns == DnsIP.d_403_online_dns[1]:
+
+        elif primary_dns in (DnsIP.d_403_online_dns[0], DnsIP.d_403_online_dns[1]) or secondary_dns in (
+                DnsIP.d_403_online_dns[0], DnsIP.d_403_online_dns[1]):
             self.interface_name_lbl.config(text=f"{interface_name.strip()}: {DnsName.d_403_online_txt}")
-        elif primary_dns == DnsIP.shecan_dns[0] and secondary_dns == DnsIP.shecan_dns[1]:
+
+        elif primary_dns in (DnsIP.shecan_dns[0], DnsIP.shecan_dns[1]) or secondary_dns in (
+                DnsIP.shecan_dns[0], DnsIP.shecan_dns[1]):
             self.interface_name_lbl.config(text=f"{interface_name.strip()}: {DnsName.shecan_txt}")
