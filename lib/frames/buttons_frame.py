@@ -135,32 +135,32 @@ class ButtonsFrame(Frame):
             return
         t = Thread(target=self.set_electro_dns, daemon=True)
         t.start()
-        self.master.after(20, self.check_thread, t)
+        self.master.after(5, self.check_thread, t)
 
     def handle_click_403_online(self):
         if not self.allow_click_403_online_btn:
             return
         t = Thread(target=self.set_403_online_dns, daemon=True)
         t.start()
-        self.master.after(20, self.check_thread, t)
+        self.master.after(5, self.check_thread, t)
 
     def handle_click_shecan(self):
         if not self.allow_click_shecan_btn:
             return
         t = Thread(target=self.set_shecan_dns, daemon=True)
         t.start()
-        self.master.after(20, self.check_thread, t)
+        self.master.after(5, self.check_thread, t)
 
     def handle_click_remove(self):
         if not self.allow_click_remove_btn:
             return
         t = Thread(target=self.remove_dns, daemon=True)
         t.start()
-        self.master.after(20, self.check_thread, t)
+        self.master.after(5, self.check_thread, t)
 
     def check_thread(self, thread_obj):
         if thread_obj.is_alive():
-            self.master.after(20, self.check_thread, thread_obj)
+            self.master.after(5, self.check_thread, thread_obj)
 
     def disable_buttons(self):
         self.btn_electro_dns.config(state="disabled")
