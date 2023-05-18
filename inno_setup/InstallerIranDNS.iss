@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "IranDNS"
-#define MyAppVersion "1.0.2"
+#define MyAppVersion "1.0.0"
 #define MyAppPublisher "IranDNS, Inc."
 #define MyAppURL "https://github.com/omides248/iran_dns"
 #define MyAppExeName "iran_dns.exe"

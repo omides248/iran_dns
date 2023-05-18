@@ -12,8 +12,10 @@ class Netsh:
             interface = cls.get_default_interface_name()
 
         if interface and primary_dns and secondary_dns:
-            os.system(f'netsh interface ipv4 set dns name="{interface}" static {primary_dns} && '
-                      f'netsh interface ipv4 add dns name="{interface}" {secondary_dns} index=2')
+            c1 = f'netsh interface ipv4 set dns name="{interface}" static {primary_dns}'
+            c2 = f'netsh interface ipv4 add dns name="{interface}" {secondary_dns} index=2'
+            subprocess.check_call(c1, shell=True)
+            subprocess.check_call(c2, shell=True)
 
     @classmethod
     def clear_dns(cls, interface=None):
