@@ -1,18 +1,9 @@
 import re
 import subprocess
+import os
 
 
 class Netsh:
-
-    # @classmethod
-    # def set_dns_one_command(cls, interface=None, primary_dns=None, secondary_dns=None):
-    #     if not interface:
-    #         interface = cls.get_default_interface_name()
-    #     command = f'netsh interface ipv4 set dnsservers name="{interface}" source=dhcp && ' \
-    #               f'netsh interface ipv4 set dns name="{interface}" static {primary_dns} && ' \
-    #               f'netsh interface ipv4 add dns name="{interface}" {secondary_dns} index=2'
-    #
-    #     proc = subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
     @classmethod
     def set_dns(cls, interface=None, primary_dns=None, secondary_dns=None):
@@ -21,13 +12,8 @@ class Netsh:
             interface = cls.get_default_interface_name()
 
         if interface and primary_dns and secondary_dns:
-            # cls.clear_dns()
-            # os.system(f'netsh interface ipv4 set dns name="{interface}" static {primary_dns}')
-            # os.system(f'netsh interface ipv4 add dns name="{interface}" {secondary_dns} index=2')
-            subprocess.Popen(f'netsh interface ipv4 set dns name="{interface}" static {primary_dns}',
-                             shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-            subprocess.Popen(f'netsh interface ipv4 add dns name="{interface}" {secondary_dns} index=2',
-                             shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            os.system(f'netsh interface ipv4 set dns name="{interface}" static {primary_dns} && '
+                      f'netsh interface ipv4 add dns name="{interface}" {secondary_dns} index=2')
 
     @classmethod
     def clear_dns(cls, interface=None):

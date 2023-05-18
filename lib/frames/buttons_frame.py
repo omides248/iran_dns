@@ -117,12 +117,6 @@ class ButtonsFrame(Frame):
 
         Netsh.clear_dns(self.interface_name)
 
-        # primary_dns, secondary_dns = Netsh.get_primary_secondary_dns(self.interface_name)
-        #
-        # self.windows_main.frm_interface_label.primary_dns_lbl.config(text=primary_dns)
-        # self.windows_main.frm_interface_label.secondary_dns_lbl.config(text=secondary_dns)
-        # self.windows_main.frm_interface_label.interface_name_lbl.config(text="")
-
         self.windows_main.frm_interface_label.update_frame_label()
 
         self.enable_buttons()
@@ -134,7 +128,7 @@ class ButtonsFrame(Frame):
             return
         t = Thread(target=self.set_radar_game_dns, daemon=True)
         t.start()
-        self.master.after(20, self.check_thread, t)
+        self.master.after(5, self.check_thread, t)
 
     def handle_click_electro(self):
         if not self.allow_click_electro_btn:

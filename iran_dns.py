@@ -87,8 +87,6 @@ if __name__ == '__main__':
                 root.resizable(False, False)
                 root.configure(background=Config.background_color)
                 Windows(root)
-                # root.attributes('-topmost', True)
-                # root.update()
                 root.mainloop()
     except Exception as e:
         print(e)
