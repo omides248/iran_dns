@@ -11,6 +11,7 @@ from lib.frames.buttons_frame import ButtonsFrame
 from lib.frames.footer_frame import FooterFrame
 from lib.frames.interface_label_frame import InterfaceLabelFrame
 from lib.frames.interface_option_frame import InterfaceOptionFrame
+from lib.frames.set_dns_frame import SetDNSFrame
 from lib.procss_handler import ProcessHandler
 
 """
@@ -51,8 +52,11 @@ class Windows:
 
         self.frm_space1 = Frame(self.master, relief=RAISED, bd=0, background=Config.background_color)
         self.frm_space2 = Frame(self.master, relief=RAISED, bd=0, background=Config.background_color)
+        self.frm_space3 = Frame(self.master, relief=RAISED, bd=0, background=Config.background_color)
+        self.frm_space4 = Frame(self.master, relief=RAISED, bd=0, background=Config.background_color)
         self.frm_buttons = ButtonsFrame(self.master, self)
         self.frm_interface_option = InterfaceOptionFrame(self.master, self)
+        self.frm_set_dns_frame = SetDNSFrame(self.master, self)
         self.frm_interface_label = InterfaceLabelFrame(self.master, self)
         self.frm_footer = FooterFrame(self.master, self)
 
@@ -69,11 +73,14 @@ class Windows:
         d.download_new_version()
 
     def register_frame(self):
-        self.frm_space1.pack(fill="both", expand=True, padx=80, pady=30)
-        self.frm_buttons.pack(fill="both", expand=True, padx=100)
+        self.frm_space1.pack(fill="both", expand=True, padx=50, pady=20)
+        self.frm_buttons.pack(fill="both", expand=True, padx=95)
         self.frm_interface_option.pack()
+        self.frm_space3.pack(fill="both", expand=True, padx=95, pady=5)
+        self.frm_set_dns_frame.pack()
+        self.frm_space4.pack(fill="both", expand=True, padx=95, pady=10)
         self.frm_interface_label.pack()
-        self.frm_space2.pack(fill="both", expand=True, padx=100, pady=40)
+        self.frm_space2.pack(fill="both", expand=True, padx=95, pady=20)
         self.frm_footer.pack(side="bottom", fill="x", expand=True)
 
 

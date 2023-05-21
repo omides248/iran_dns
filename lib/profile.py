@@ -22,8 +22,22 @@ class Profile:
         except Exception as e:
             return "Select Your Internet"
 
+    @property
+    def set_dns_1(self):
+        try:
+            return self.collection.get(doc_id=1).get("set_dns_1", 1)
+        except Exception as e:
+            return 1
+
+    @property
+    def set_dns_2(self):
+        try:
+            return self.collection.get(doc_id=1).get("set_dns_2", 1)
+        except Exception as e:
+            return 1
+
     @classmethod
-    def insert(cls, profile_interface_remember=None, interface_option=None):
+    def insert(cls, profile_interface_remember=None, interface_option=None, set_dns_1=None, set_dns_2=None):
         profile_dict = {}
         if profile_interface_remember is not None:
             if profile_interface_remember == 0:
@@ -40,6 +54,12 @@ class Profile:
 
             if interface_option:
                 profile_dict["interface_option_menu_choice"] = interface_option
+
+        if set_dns_1 is not None:
+            profile_dict["set_dns_1"] = set_dns_1
+
+        if set_dns_2 is not None:
+            profile_dict["set_dns_2"] = set_dns_2
 
         if profile_dict:
             cls.collection.upsert(Document(profile_dict, doc_id=1))

@@ -43,7 +43,7 @@ class ButtonsFrame(Frame):
         if Profile().interface_name == "Auto Detect":
             self.interface_name = Netsh.get_default_interface_name()
 
-        primary_dns, secondary_dns = DnsIP.electro_dns
+        primary_dns, secondary_dns = self.get_primary_secondary_dns_base_profile(DnsName.electro_txt)
         Netsh.set_dns(self.interface_name, primary_dns, secondary_dns)
 
         self.windows_main.frm_interface_label.update_frame_label()
@@ -61,7 +61,7 @@ class ButtonsFrame(Frame):
         if Profile().interface_name == "Auto Detect":
             self.interface_name = Netsh.get_default_interface_name()
 
-        primary_dns, secondary_dns = DnsIP.radar_game_dns
+        primary_dns, secondary_dns = self.get_primary_secondary_dns_base_profile(DnsName.radar_game_txt)
         Netsh.set_dns(self.interface_name, primary_dns, secondary_dns)
 
         self.windows_main.frm_interface_label.update_frame_label()
@@ -79,7 +79,7 @@ class ButtonsFrame(Frame):
         if Profile().interface_name == "Auto Detect":
             self.interface_name = Netsh.get_default_interface_name()
 
-        primary_dns, secondary_dns = DnsIP.d_403_online_dns
+        primary_dns, secondary_dns = self.get_primary_secondary_dns_base_profile(DnsName.d_403_online_txt)
         Netsh.set_dns(self.interface_name, primary_dns, secondary_dns)
 
         self.windows_main.frm_interface_label.update_frame_label()
@@ -97,7 +97,7 @@ class ButtonsFrame(Frame):
         if Profile().interface_name == "Auto Detect":
             self.interface_name = Netsh.get_default_interface_name()
 
-        primary_dns, secondary_dns = DnsIP.shecan_dns
+        primary_dns, secondary_dns = self.get_primary_secondary_dns_base_profile(DnsName.shecan_txt)
         Netsh.set_dns(self.interface_name, primary_dns, secondary_dns)
 
         self.windows_main.frm_interface_label.update_frame_label()
@@ -122,6 +122,36 @@ class ButtonsFrame(Frame):
         self.enable_buttons()
         self.allow_click_remove_btn = True
         print("End remove dns")
+
+    @classmethod
+    def get_primary_secondary_dns_base_profile(cls, dns_name=None):
+        from lib.profile import Profile
+
+        if dns_name:
+            if dns_name == DnsName.electro_txt:
+                primary_dns, secondary_dns = DnsIP.electro_dns
+            elif dns_name == DnsName.radar_game_txt:
+                primary_dns, secondary_dns = DnsIP.radar_game_dns
+            elif dns_name == DnsName.shecan_txt:
+                primary_dns, secondary_dns = DnsIP.shecan_dns
+            elif dns_name == DnsName.d_403_online_txt:
+                primary_dns, secondary_dns = DnsIP.d_403_online_dns
+            else:
+                primary_dns, secondary_dns = None, None
+
+            set_dns_1 = Profile().set_dns_1
+            set_dns_2 = Profile().set_dns_2
+
+            if set_dns_1 == 0 and set_dns_2 == 0:
+                primary_dns, secondary_dns = None, None
+            elif set_dns_1 == 0 and set_dns_2 == 1:
+                primary_dns = secondary_dns
+                secondary_dns = None
+            elif set_dns_1 == 1 and set_dns_2 == 0:
+                secondary_dns = None
+
+            return primary_dns, secondary_dns
+        return None, None
 
     def handle_click_radar_game(self):
         if not self.allow_click_radar_game_btn:

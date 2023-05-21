@@ -11,11 +11,14 @@ class Netsh:
         if not interface:
             interface = cls.get_default_interface_name()
 
-        if interface and primary_dns and secondary_dns:
-            c1 = f'netsh interface ipv4 set dns name="{interface}" static {primary_dns}'
-            c2 = f'netsh interface ipv4 add dns name="{interface}" {secondary_dns} index=2'
-            subprocess.check_call(c1, shell=True)
-            subprocess.check_call(c2, shell=True)
+        if interface:
+            if primary_dns:
+                c1 = f'netsh interface ipv4 set dns name="{interface}" static {primary_dns}'
+                subprocess.check_call(c1, shell=True)
+
+            if secondary_dns:
+                c2 = f'netsh interface ipv4 add dns name="{interface}" {secondary_dns} index=2'
+                subprocess.check_call(c2, shell=True)
 
     @classmethod
     def clear_dns(cls, interface=None):
