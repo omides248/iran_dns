@@ -22,7 +22,6 @@ class Netsh:
 
     @classmethod
     def clear_dns(cls, interface=None):
-
         if not interface:
             interface = cls.get_default_interface_name()
 

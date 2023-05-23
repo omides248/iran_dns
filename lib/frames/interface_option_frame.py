@@ -37,4 +37,8 @@ class InterfaceOptionFrame(Frame):
     def option_changed(self, *args):
         from lib.profile import Profile
         Profile.insert(interface_option=self.interface_var.get())
+        if self.interface_var.get() == "Auto Detect" or self.interface_var.get() == "":
+            self.windows_main.frm_buttons.interface_name = Netsh.get_default_interface_name()
+        else:
+            self.windows_main.frm_buttons.interface_name = self.interface_var.get()
         self.windows_main.frm_interface_label.update_frame_label()

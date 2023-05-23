@@ -19,7 +19,7 @@ class ButtonsFrame(Frame):
         self.allow_click_403_online_btn = True
         self.allow_click_shecan_btn = True
         self.allow_click_remove_btn = True
-        self.interface_name = ""
+        self.interface_name = self.get_interface_name_base_profile()
 
         self.btn_electro_dns = ttk.Button(self, text=DnsName.electro_txt, command=self.handle_click_electro)
         self.btn_radar_game_dns = ttk.Button(self, text=DnsName.radar_game_txt, command=self.handle_click_radar_game)
@@ -39,10 +39,6 @@ class ButtonsFrame(Frame):
         self.allow_click_electro_btn = False
         self.disable_buttons()
 
-        from lib.profile import Profile
-        if Profile().interface_name == "Auto Detect":
-            self.interface_name = Netsh.get_default_interface_name()
-
         primary_dns, secondary_dns = self.get_primary_secondary_dns_base_profile(DnsName.electro_txt)
         Netsh.set_dns(self.interface_name, primary_dns, secondary_dns)
 
@@ -56,10 +52,6 @@ class ButtonsFrame(Frame):
         print("Radar Game")
         self.allow_click_radar_game_btn = False
         self.disable_buttons()
-
-        from lib.profile import Profile
-        if Profile().interface_name == "Auto Detect":
-            self.interface_name = Netsh.get_default_interface_name()
 
         primary_dns, secondary_dns = self.get_primary_secondary_dns_base_profile(DnsName.radar_game_txt)
         Netsh.set_dns(self.interface_name, primary_dns, secondary_dns)
@@ -75,10 +67,6 @@ class ButtonsFrame(Frame):
         self.allow_click_403_online_btn = False
         self.disable_buttons()
 
-        from lib.profile import Profile
-        if Profile().interface_name == "Auto Detect":
-            self.interface_name = Netsh.get_default_interface_name()
-
         primary_dns, secondary_dns = self.get_primary_secondary_dns_base_profile(DnsName.d_403_online_txt)
         Netsh.set_dns(self.interface_name, primary_dns, secondary_dns)
 
@@ -92,10 +80,6 @@ class ButtonsFrame(Frame):
         print("Shecan")
         self.allow_click_shecan_btn = False
         self.disable_buttons()
-
-        from lib.profile import Profile
-        if Profile().interface_name == "Auto Detect":
-            self.interface_name = Netsh.get_default_interface_name()
 
         primary_dns, secondary_dns = self.get_primary_secondary_dns_base_profile(DnsName.shecan_txt)
         Netsh.set_dns(self.interface_name, primary_dns, secondary_dns)
@@ -111,10 +95,6 @@ class ButtonsFrame(Frame):
         self.allow_click_remove_btn = False
         self.disable_buttons()
 
-        from lib.profile import Profile
-        if Profile().interface_name == "Auto Detect":
-            self.interface_name = Netsh.get_default_interface_name()
-
         Netsh.clear_dns(self.interface_name)
 
         self.windows_main.frm_interface_label.update_frame_label()
@@ -122,6 +102,15 @@ class ButtonsFrame(Frame):
         self.enable_buttons()
         self.allow_click_remove_btn = True
         print("End remove dns")
+
+    @classmethod
+    def get_interface_name_base_profile(cls):
+        from lib.profile import Profile
+        if Profile().interface_name == "Auto Detect" or Profile().interface_name == "":
+            interface_name = Netsh.get_default_interface_name()
+        else:
+            interface_name = Profile().interface_name
+        return interface_name
 
     @classmethod
     def get_primary_secondary_dns_base_profile(cls, dns_name=None):

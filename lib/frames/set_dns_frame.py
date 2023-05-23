@@ -25,8 +25,8 @@ class SetDNSFrame(Frame):
                                          command=self.profile_set_dns_2_handler
                                          )
 
-        self.set_dns_1.grid(row=0, column=1, sticky="ew", padx=0, pady=0)
-        self.set_dns_2.grid(row=0, column=2, sticky="ew", padx=0, pady=0)
+        # self.set_dns_1.grid(row=0, column=1, sticky="ew", padx=0, pady=0)
+        # self.set_dns_2.grid(row=0, column=2, sticky="ew", padx=0, pady=0)
 
     def profile_set_dns_1_handler(self):
         from lib.profile import Profile
